@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<title>Banquet OBR — Invitation</title>
+<title>Séance Feu de Camp — OBR</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
@@ -43,11 +43,8 @@
     animation: fadeIn 1.2s ease 0.2s forwards;
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
+  @keyframes fadeIn { to { opacity: 1; } }
 
-  /* ── Grain overlay ── */
   body::before {
     content: '';
     position: fixed;
@@ -59,7 +56,7 @@
     background-size: 200px;
   }
 
-  /* ── Header sigil ── */
+  /* ── Header ── */
   .sigil {
     width: 100%;
     display: flex;
@@ -109,13 +106,12 @@
     margin-top: 8px;
   }
 
-  /* ── Séparateur ── */
   .rule {
     width: min(80vw, 280px);
     height: 1px;
-    position: relative;
     margin: 6px auto 0;
     z-index: 1;
+    position: relative;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
     opacity: 0.5;
   }
@@ -134,7 +130,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Cadre doré */
   .invitation-wrap::before {
     content: '';
     position: absolute;
@@ -145,7 +140,6 @@
     z-index: 2;
   }
 
-  /* Coins décoratifs */
   .corner {
     position: absolute;
     width: 14px;
@@ -166,7 +160,6 @@
     border-radius: 1px;
   }
 
-  /* ── Texte discret ── */
   .caption {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -271,28 +264,20 @@
   }
 
   .cal-btn:hover::before,
-  .cal-btn:active::before {
-    opacity: 0.08;
-  }
+  .cal-btn:active::before { opacity: 0.08; }
 
   .cal-btn:hover,
-  .cal-btn:active {
-    box-shadow: 0 0 24px rgba(201,168,76,0.2);
-  }
+  .cal-btn:active { box-shadow: 0 0 24px rgba(201,168,76,0.2); }
 
-  .cal-btn span {
+  .cal-btn span, .cal-icon {
     position: relative;
     z-index: 1;
   }
 
-  .cal-icon {
-    font-size: 1rem;
-    position: relative;
-    z-index: 1;
-  }
+  .cal-icon { font-size: 1rem; }
 
-  /* ── Bouton Facebook ── */
-  .fb-wrap {
+  /* ── Bouton secret 🤫 ── */
+  .secret-wrap {
     width: min(88vw, 380px);
     margin: 10px auto 0;
     position: relative;
@@ -300,63 +285,70 @@
     animation: revealUp 1s ease 1.75s both;
   }
 
-  .fb-btn {
+  .secret-btn {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 15px 24px;
+    padding: 12px 24px;
     background: transparent;
-    border: 1px solid rgba(201,168,76,0.35);
+    border: 1px solid rgba(201,168,76,0.15);
     border-radius: 2px;
-    color: rgba(245, 236, 215, 0.55);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
     cursor: pointer;
-    text-decoration: none;
-    transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .secret-btn:hover,
+  .secret-btn:active {
+    border-color: rgba(201,168,76,0.35);
+    background: rgba(201,168,76,0.04);
+  }
+
+  /* ── Panneau message secret ── */
+  #secretPanel {
+    width: min(88vw, 380px);
+    margin: 0 auto;
     position: relative;
+    z-index: 1;
+    max-height: 0;
     overflow: hidden;
-  }
-
-  .fb-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gold);
+    transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
     opacity: 0;
-    transition: opacity 0.3s ease;
   }
 
-  .fb-btn:hover::before,
-  .fb-btn:active::before {
-    opacity: 0.05;
+  #secretPanel.open {
+    max-height: 1200px;
+    opacity: 1;
   }
 
-  .fb-btn:hover,
-  .fb-btn:active {
-    border-color: rgba(201,168,76,0.6);
-    color: rgba(245, 236, 215, 0.8);
-    box-shadow: 0 0 18px rgba(201,168,76,0.12);
+  .secret-inner {
+    margin-top: 10px;
+    padding: 20px 18px;
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 2px;
+    text-align: left;
   }
 
-  .fb-btn span {
-    position: relative;
-    z-index: 1;
+  .secret-inner p {
+    font-size: 0.8rem;
+    line-height: 1.85;
+    color: rgba(245, 236, 215, 0.72);
+    letter-spacing: 0.03em;
+    white-space: pre-line;
   }
 
-  /* Icône Facebook SVG inline */
-  .fb-icon {
-    position: relative;
-    z-index: 1;
-    width: 14px;
-    height: 14px;
-    opacity: 0.7;
-    flex-shrink: 0;
+  .secret-inner .secret-sig {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--gold);
+    opacity: 0.8;
+    letter-spacing: 0.08em;
   }
 
   /* ── Pied de page ── */
@@ -377,9 +369,9 @@
 
   <div class="sigil">
     <div class="sigil-line"></div>
-    <div class="sigil-icon">🐆🌴</div>
-    <h1 class="event-name">Banquet OBR</h1>
-    <p class="event-sub">25 Avril 2026</p>
+    <div class="sigil-icon">🔥🌿</div>
+    <h1 class="event-name">Séance Feu de Camp</h1>
+    <p class="event-sub">8 Mai 2026 — Chez Adèle</p>
   </div>
 
   <div class="rule"></div>
@@ -389,8 +381,7 @@
     <div class="corner tr"></div>
     <div class="corner bl"></div>
     <div class="corner br"></div>
-    <!-- Renomme ton fichier "invitation.jpg" et place-le dans le même dossier -->
-    <img src="invitation.jpg" alt="Invitation Banquet OBR" />
+    <img src="invitation.jpg" alt="Séance Feu de Camp OBR" />
   </div>
 
   <p class="caption">Invitation officielle</p>
@@ -399,15 +390,19 @@
     <div class="detail-row">
       <span class="detail-icon">🗓</span>
       <div class="detail-text">
-        <strong>Date</strong>
-        Samedi 25 avril 2026 — 18h30 à 02h00
+        <strong>Programme</strong>
+        17h00 — BBQ 🍗🥩<br>
+        18h00 — Verre de l'amitié 🍻<br>
+        19h30 — Gaudeamus
       </div>
     </div>
     <div class="detail-row">
       <span class="detail-icon">📍</span>
       <div class="detail-text">
         <strong>Lieu</strong>
-        Pl. des Sciences 1b<br>1348 Ottignies-Louvain-la-Neuve
+        Chez Adèle<br>
+        Rue Pierre Joseph Redouté 1<br>
+        1348 Ottignies-Louvain-la-Neuve
       </div>
     </div>
   </div>
@@ -419,35 +414,61 @@
     </a>
   </div>
 
-  <div class="fb-wrap">
-    <a class="fb-btn"
-       href="https://fb.me/34XpR0TsYpafo3Z"
-       target="_blank"
-       rel="noopener">
-      <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-      </svg>
-      <span>Voir l'événement Facebook</span>
-    </a>
+  <!-- Bouton secret -->
+  <div class="secret-wrap">
+    <button class="secret-btn" id="secretBtn" aria-expanded="false">🤫</button>
+  </div>
+
+  <!-- Panneau message secret -->
+  <div id="secretPanel" aria-hidden="true">
+    <div class="secret-inner">
+      <p>YO! AMAKURU?
+Petit bilan (ou ce qu'il en reste)
+
+D'abord, on vous dit merci d'être venus aux séances et aux divers événements de l'Ordre cette année. Après le rush du Banquet, on peut enfin confirmer que ça s'est passé dans le "débordement" total. L'alcool pleuvait sur nos visages comme la mousson sur Cotonou, et le traiteur ? Ah, il nous a GÂTÉ ! On n'a que des bons retours pour l'instant... Parce que là, les souvenirs sont plus flous que photo prise avec le gsm de Marie-Aimée après une séance.
+
+Ce 1er mai aura lieu une corona pour Accueillir 2 personnes — Etienne Camer et grand voyageur 🇨🇲, et Nadia Tunisienne et spécialiste en couscous Royal à ses heures perdues, ce sera à la salle de la grande ducale à LLN, dans l'après-midi !
+
+📅 L'Ultime Rendez-vous
+
+Ensuite, je viens vers vous pour annoncer la toute dernière séance de l'année académique, le vendredi 08/05.
+⚠️ ATTENTION ⚠️
+Elle ne se passera PAS au Psycho, mais à l'ADELE contrairement à ce qui était écrit dans le "Save the Date" de janvier (OUI, JANVIER ! Adolphe, tu croyais que je sortais cette réunion de ma case de marabout ou quoi ? Eh bien non, mon frère. Il fallait l'enregistrer dans ton Adolphone. Et ramène nous le colis d'ailleurs) !
+
+Verre de l'amitié à 18h pétante 🍻 Gaudeamus à 19h30.
+On vous connaît les africains alors pour vous motiver à arriver à l'heure je vous propose un petit BBQ à partir de 17h dans la pelouse de l'ADELE pour se sustenter au soleil avant de se détruire dans la pénombre ! 🍗🥩🍤
+
+RÉCAP :
+📍 Chez Adèle : Rue Pierre Joseph Redouté 1, 1348 Ottignies-Louvain-la-Neuve
+📅 08/05
+🕠 17h BBQ, 18h Verre de l'amitié, 19h30 Gaudeamus</p>
+      <p class="secret-sig">Pour le Comité,
+Andy USHER Hajayandi
+Grand gourou de vos rêves les plus fous
+USVCFBRIRO 🌴🐆☀️🐆🌴
+
+p.s. : De rien pour cette précieuse minute perdue à lire that long ASS post, vous la récupérerez jamais.</p>
+    </div>
   </div>
 
   <div class="footer-line"></div>
 
 <script>
-  // ── Génération du lien .ics ──────────────────────────────
-  // La fin de soirée est le 26/04 à 02h00
+  // ── Calendrier .ics ─────────────────────────────────────
+  // BBQ démarre à 17h CEST = 15h UTC le 08/05
+  // Fin estimée après Gaudeamus ~23h CEST = 21h UTC
   const event = {
-    title:    "Banquet OBR 🐆🌴",
-    start:    "20260425T163000Z",   // 18h30 CEST = 16h30 UTC
-    end:      "20260426T000000Z",   // 02h00 CEST = 00h00 UTC
-    location: "Pl. des Sciences 1b, 1348 Ottignies-Louvain-la-Neuve",
-    description: "Invitation officielle — Banquet OBR"
+    title:       "Séance Feu de Camp OBR 🔥🌿",
+    start:       "20260508T150000Z",   // 17h00 CEST = 15h00 UTC
+    end:         "20260508T210000Z",   // 23h00 CEST = 21h00 UTC
+    location:    "Rue Pierre Joseph Redouté 1, 1348 Ottignies-Louvain-la-Neuve",
+    description: "17h BBQ 🍗 — 18h Verre de l'amitié 🍻 — 19h30 Gaudeamus"
   };
 
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Banquet OBR//FR",
+    "PRODID:-//OBR//FR",
     "BEGIN:VEVENT",
     `DTSTART:${event.start}`,
     `DTEND:${event.end}`,
@@ -461,8 +482,27 @@
 
   const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
   const url  = URL.createObjectURL(blob);
-  document.getElementById("calBtn").href = url;
-  document.getElementById("calBtn").download = "banquet-obr.ics";
+  document.getElementById("calBtn").href     = url;
+  document.getElementById("calBtn").download = "seance-feu-de-camp-obr.ics";
+
+  // ── Bouton secret 🤫 ────────────────────────────────────
+  const secretBtn   = document.getElementById("secretBtn");
+  const secretPanel = document.getElementById("secretPanel");
+  let   isOpen      = false;
+
+  secretBtn.addEventListener("click", () => {
+    isOpen = !isOpen;
+    secretPanel.classList.toggle("open", isOpen);
+    secretBtn.setAttribute("aria-expanded", isOpen);
+    secretPanel.setAttribute("aria-hidden",  !isOpen);
+
+    // Scroll doux vers le panneau à l'ouverture
+    if (isOpen) {
+      setTimeout(() => {
+        secretPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
+  });
 </script>
 
 </body>
